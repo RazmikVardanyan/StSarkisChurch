@@ -8,7 +8,15 @@ import ApplicationForm from '../components/ApplicationForm';
 import RichText from '../components/RichText';
 import { Reveal } from '../components/SectionHeader';
 import { getTapanPageData } from '../lib/api';
-import { getImageUrl } from '../lib/api';
+import { urlFor } from '../lib/sanity';
+
+function councilImg(c) {
+  if (c.imageUrl) return c.imageUrl;
+  const raw = c.photo || c.image;
+  if (typeof raw === 'string') return raw;
+  if (raw?.asset) { try { return urlFor(raw).width(300).height(300).url(); } catch {} }
+  return '/placeholder.jpg';
+}
 
 export default function TapanPage({ chair, council, pageContent, news, gallery, settings }) {
   return (
@@ -50,7 +58,7 @@ export default function TapanPage({ chair, council, pageContent, news, gallery, 
               {council.map((c, i) => (
                 <Reveal key={c._id || i} delay={i * 0.1}>
                   <div className="cc">
-                    <img className="cc-ph"  src={getImageUrl(c.photo || c.image, 400, 400)} alt={c.name} />
+                    <img className="cc-ph" src={councilImg(c)} alt={c.name} />
                     <div className="cc-nm">{c.name}</div>
                     <div className="cc-rl">{c.role}</div>
                   </div>

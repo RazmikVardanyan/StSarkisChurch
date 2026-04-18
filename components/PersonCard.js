@@ -1,10 +1,17 @@
-// components/PersonCard.js — работает и с заглушками, и с Sanity
+// components/PersonCard.js
 import { Reveal } from './SectionHeader';
-import { getImageUrl } from '../lib/api';
+import { urlFor } from '../lib/sanity';
+
+function resolveImage(person, w, h) {
+  if (person.imageUrl) return person.imageUrl;
+  const raw = person.photo || person.image;
+  if (typeof raw === 'string') return raw;
+  if (raw?.asset) { try { return urlFor(raw).width(w).height(h).url(); } catch {} }
+  return '/placeholder.jpg';
+}
 
 export default function PersonCard({ person, centered = false }) {
-  const rawImg = person.photo || person.image;
-  const img = typeof rawImg === 'string' ? rawImg : getImageUrl(rawImg, 400, 520);
+  const img = resolveImage(person, 400, 520);
   return (
     <Reveal>
       <div className="pc" style={centered ? { justifyContent: 'center', maxWidth: 560, margin: '0 auto 40px' } : {}}>

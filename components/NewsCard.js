@@ -1,10 +1,17 @@
-// components/NewsCard.js — карточка со ссылкой на полную новость
+// components/NewsCard.js
 import Link from 'next/link';
 import { Reveal } from './SectionHeader';
-import { getImageUrl } from '../lib/api';
+import { urlFor } from '../lib/sanity';
+
+function resolveImage(item, w, h) {
+  if (item.imageUrl) return item.imageUrl;
+  if (typeof item.image === 'string') return item.image;
+  if (item.image?.asset) { try { return urlFor(item.image).width(w).height(h).url(); } catch {} }
+  return '/placeholder.jpg';
+}
 
 export default function NewsCard({ item, delay = 0 }) {
-  const img = typeof item.image === 'string' ? item.image : getImageUrl(item.image, 600, 400);
+  const img = resolveImage(item, 600, 400);
   const href = item.slug?.current ? `/news/${item.slug.current}` : '#';
 
   return (

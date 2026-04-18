@@ -1,7 +1,14 @@
-// components/HeroSlider.js — работает и с заглушками, и с Sanity
+// components/HeroSlider.js
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Icons from './Icons';
-import { getImageUrl } from '../lib/api';
+import { urlFor } from '../lib/sanity';
+
+function resolveImage(item, w, h) {
+  if (item.imageUrl) return item.imageUrl;
+  if (typeof item.image === 'string') return item.image;
+  if (item.image?.asset) { try { return urlFor(item.image).width(w).height(h).url(); } catch {} }
+  return '/placeholder.jpg';
+}
 
 export default function HeroSlider({ slides = [] }) {
   const [cur, setCur] = useState(0);
@@ -12,16 +19,13 @@ export default function HeroSlider({ slides = [] }) {
   const go = (d) => { clearInterval(timer.current); setCur(p => (p + d + len) % len); start(); };
   const dot = (i) => { clearInterval(timer.current); setCur(i); start(); };
 
-  // Получить URL картинки — работает и со строкой, и с объектом Sanity
-  const imgSrc = (image) => typeof image === 'string' ? image : getImageUrl(image, 1400, 700);
-
   if (!slides.length) return <div className="hero" />;
 
   return (
     <div className="hero">
       {slides.map((s, i) => (
         <div key={s._id} className={`hs${i === cur ? ' act' : ''}`}>
-          <img className="hs-img" src={imgSrc(s.image)} alt="" />
+          <img className="hs-img" src={resolveImage(s, 1400, 700)} alt="" />
           <div className="hs-ov">
             {i === cur && (
               <div className="hs-c in">
