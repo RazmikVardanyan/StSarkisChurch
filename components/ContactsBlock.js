@@ -1,3 +1,4 @@
+// components/ContactsBlock.js — литургия в 11:00
 import { Reveal } from './SectionHeader';
 import Icons from './Icons';
 
@@ -17,7 +18,7 @@ export default function ContactsBlock({ settings = {} }) {
             <h4>Часы работы</h4>
             <div className="ci">{Icons.clock()} {settings.workHoursWeekday || 'Пн–Пт: 09:00 – 18:00'}</div>
             <div className="ci">{Icons.clock()} {settings.workHoursWeekend || 'Сб–Вс: 08:00 – 15:00'}</div>
-            <div className="ci">{Icons.church()} Литургия: Вс в 10:00</div>
+            <div className="ci">{Icons.church()} Литургия: Вс в 11:00</div>
             <div className="ci" style={{ marginTop: 8, color: 'var(--text-light)', fontSize: 13 }}>
               Запись на таинства по телефону
             </div>

@@ -1,3 +1,4 @@
+// components/Header.js — навигация с 4 страницами
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -20,6 +21,7 @@ export default function Header() {
     { href: '/', label: 'Главная' },
     { href: '/about', label: 'О нас' },
     { href: '/tapan', label: 'Тапан' },
+    { href: '/genocide', label: 'Геноцид армян' },
   ];
 
   const cls = isHome && !scrolled ? 'hd hd-t' : 'hd hd-bg';

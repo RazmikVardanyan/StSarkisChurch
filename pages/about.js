@@ -1,13 +1,14 @@
-// pages/about.js — О нас (данные из Sanity CMS)
+// pages/about.js — О нас (с галереей церкви)
 import Layout from '../components/Layout';
 import SectionHeader from '../components/SectionHeader';
 import PersonCard from '../components/PersonCard';
 import ContactsBlock from '../components/ContactsBlock';
+import GalleryGrid from '../components/GalleryGrid';
 import RichText from '../components/RichText';
 import { Reveal } from '../components/SectionHeader';
 import { getAboutPageData } from '../lib/api';
 
-export default function AboutPage({ pastor, pageContent, settings }) {
+export default function AboutPage({ pastor, pageContent, gallery, settings }) {
   return (
     <Layout settings={settings}>
       <div className="ph ph-ab">
@@ -35,6 +36,16 @@ export default function AboutPage({ pastor, pageContent, settings }) {
 
         <SectionHeader label="Духовенство" title="Настоятель храма" />
         {pastor && <PersonCard person={pastor} />}
+
+        {/* Галерея церкви — фото из категории «Церковь» */}
+        {gallery && gallery.length > 0 && (
+          <>
+            <SectionHeader label="Фото храма" title="Галерея" />
+            <div style={{ marginBottom: 48 }}>
+              <GalleryGrid images={gallery} showCaptions />
+            </div>
+          </>
+        )}
 
         <SectionHeader label="Свяжитесь с нами" title="Контакты" />
         <ContactsBlock settings={settings || {}} />

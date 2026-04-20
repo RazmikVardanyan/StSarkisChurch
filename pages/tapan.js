@@ -1,4 +1,4 @@
-// pages/tapan.js — Тапан (данные из Sanity CMS)
+// pages/tapan.js — Тапан (с подписями в галерее)
 import Layout from '../components/Layout';
 import SectionHeader from '../components/SectionHeader';
 import PersonCard from '../components/PersonCard';
@@ -72,7 +72,7 @@ export default function TapanPage({ chair, council, pageContent, news, gallery, 
           <>
             <SectionHeader label="Фото и видео" title="Галерея" />
             <div style={{ marginBottom: 64 }}>
-              <GalleryGrid images={gallery} />
+              <GalleryGrid images={gallery} showCaptions />
             </div>
           </>
         )}
