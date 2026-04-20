@@ -28,8 +28,6 @@ export default function GenocidePage({ pageContent, gallery, settings }) {
           background: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M30 5v50M5 30h50\' stroke=\'white\' stroke-width=\'0.5\' fill=\'none\'/%3E%3C/svg%3E")',
         }} />
         <div style={{ position: 'relative', zIndex: 1, maxWidth: 700 }}>
-          {/* Свеча памяти */}
-          <div style={{ fontSize: 48, marginBottom: 20, opacity: 0.8 }}>🕯️</div>
           <h1 style={{
             fontFamily: 'var(--font-d)', fontSize: 52, fontWeight: 300,
             color: '#F5F0EB', lineHeight: 1.15, marginBottom: 16,
@@ -147,12 +145,6 @@ export default function GenocidePage({ pageContent, gallery, settings }) {
               lineHeight: 1.6, maxWidth: 500, margin: '0 auto',
             }}>
               Помним. Скорбим. Требуем признания.
-            </p>
-            <p style={{
-              fontFamily: 'var(--font-d)', fontSize: 16,
-              color: 'var(--text-light)', marginTop: 8,
-            }}>
-              Անմոռdelays · Незабвенно
             </p>
           </div>
         </Reveal>
